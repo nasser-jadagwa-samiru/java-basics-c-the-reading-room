@@ -1,3 +1,5 @@
-public class LoanStatus {
-    
+package readingroom;
+public enum LoanStatus {
+    ACTIVE,
+    RETURNED
 }
