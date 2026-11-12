@@ -31,11 +31,19 @@ public abstract class LendingItem {
     }
 
     public void borrow(Member member) {
+        
+        if (onLoan) {
+            throw new IllegalStateException("Item is already on loan");
+        }
+
         this.onLoan = true;
         this.currentBorrower = member;
     }
 
     public void returnItem() {
+        if (onLoan) {
+            throw new IllegalStateException("This item has already been returned.");
+        }
         this.onLoan = false;
         this.currentBorrower = null;
     }

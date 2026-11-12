@@ -26,15 +26,18 @@ public class Library {
     }
 
     public void borrow(Member member, LendingItem item) {
-
-        if (item.isOnLoan()) {
-            System.out.println(item.getTitle() + " is already on loan to " + member.getName());
+        if (member == null || item == null) {
+            throw new IllegalArgumentException("Member and item cannot be null");
+}
+        
+        try {
+            item.borrow(member);
+        } catch (IllegalStateException e) {
+            System.out.println(e.getMessage());
             return;
         }
 
         int loanDays = item.getLoanPeriod(member);
-
-        item.borrow(member);
 
         member.getHistory().add("Borrowed " + item.getTitle());
 
@@ -46,12 +49,17 @@ public class Library {
     }
 
     public void returnItem(LendingItem item) {
-        if (!item.isOnLoan()) {
-            System.out.println("Item is not currently on loan");
+         if (item == null) {
+            throw new IllegalArgumentException("Item cannot be null");
+        }
+
+        try {
+            item.returnItem();
+        } catch (IllegalStateException e) {
+            System.out.println(e.getMessage());
             return;
         }
 
-        item.returnItem();
 
         for (Loan loan : loans) {
 

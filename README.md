@@ -9,7 +9,10 @@ This project rebuilds the application using object-oriented design principles wh
 ---
 
 ## Running the Application
-This project only utilizes JDK 21, and requires no further installation.
+
+This project was developed and tested using JDK 21. No external libraries, build tools, or additional dependencies are required.
+
+The application can be compiled and run directly using the Java compiler and runtime included with JDK 21.
 
 Compile:
 
@@ -80,6 +83,14 @@ In the original implementation, adding a new item type would have required modif
 
 ---
 
+## Design Evolution
+
+The initial design sketch considered using separate member subclasses for student and standard members.
+
+During implementation, this approach was not used because the member types did not currently have different behaviour beyond affecting loan periods. Introducing inheritance for members would have increased complexity without providing additional value.
+
+Inheritance was retained for lending items because item types have distinct borrowing rules and future requirements specifically mention additional item types such as digital items.
+
 ## Additional Improvement
 
 ### Return Validation
@@ -88,11 +99,14 @@ Validation was added to prevent items from being returned when they are not curr
 
 Previously, the system would report a successful return even when an item had already been returned.
 
-This improves data reliability and reduces the likelihood of inaccurate lending records.his improves data reliability an* reduces the likelihood of inaccur*te*lending records.
+This improves data reliability and reduces the likelihood of inaccurate lending records.
 
 
-## For reference,
-### This is the result of running the old code.
+## Behaviour Comparison
+
+### Original Behaviour
+
+```text
 Lent "Things Fall Apart" to Kofi Mensah for 14 days
 
 Lent "French Audio Course" to Ama Owusu for 14 days
@@ -114,17 +128,21 @@ Active loans:
   Loan #1: "Things Fall Apart" -> Kofi Mensah
 
   Loan #3: "Things Fall Apart" -> Ama Owusu
+```
 
-  ### This is close to the expected outcome after the changes
+### Rebuilt Behaviour
+
+```text
 Lent "Things Fall Apart" to Kofi Mensah for 14 days
 
 Lent "French Audio Course" to Ama Owusu for 14 days
 
-Returned French Audio Course.
+Returned "French Audio Course"
 
-Things Fall Apart is already on loan to Ama Owusu
+Things Fall Apart is already on loan to Kofi Mensah
 
 === The Reading Room - end of day ===
+
 Items:
 
   "Things Fall Apart" (Book): ON_LOAN - with Kofi Mensah
@@ -134,3 +152,6 @@ Items:
 Active loans:
 
   Loan #1: "Things Fall Apart" -> Kofi Mensah
+```
+
+The rebuilt version preserves the original behaviour while preventing multiple active loans for the same item.

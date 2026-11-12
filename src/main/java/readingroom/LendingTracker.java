@@ -29,22 +29,9 @@ public class LendingTracker {
         lib.addMember(ama);
 
         // normal afternoon
-
         lib.borrow(kofi, novel);
-
         lib.borrow(ama, audioCourse);
-
-        lib.returnItem(audioCourse);
-
-        //test to see if item can be "re-returned"
-        // lib.returnItem(audioCourse);
-
-        
-        // should now be rejected
         lib.borrow(ama, novel);
-
-        
-
         lib.printReport();
     }
 }

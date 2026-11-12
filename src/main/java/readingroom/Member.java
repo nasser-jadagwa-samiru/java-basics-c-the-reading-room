@@ -4,7 +4,6 @@ import java.util.List;
 
 public class Member {
 
-    //counter for the id of members
     private static int counter = 1;
 
     private int id;
