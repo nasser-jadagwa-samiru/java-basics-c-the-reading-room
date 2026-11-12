@@ -116,4 +116,21 @@ Active loans:
   Loan #3: "Things Fall Apart" -> Ama Owusu
 
   ### This is close to the expected outcome after the changes
-  
+Lent "Things Fall Apart" to Kofi Mensah for 14 days
+
+Lent "French Audio Course" to Ama Owusu for 14 days
+
+Returned French Audio Course.
+
+Things Fall Apart is already on loan to Ama Owusu
+
+=== The Reading Room - end of day ===
+Items:
+
+  "Things Fall Apart" (Book): ON_LOAN - with Kofi Mensah
+
+  "French Audio Course" (AudioKit): AVAILABLE
+
+Active loans:
+
+  Loan #1: "Things Fall Apart" -> Kofi Mensah
