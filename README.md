@@ -1,54 +1,119 @@
-# The Reading Room — Community Library Lending Tracker
+# The Reading Room
 
-This is the starter repository for the **Java Basics** applied lab. Read the lab
-brief alongside this repository; it explains the business, what you are being
-asked to deliver, and how your work is assessed.
+## Overview
 
-## What this is
+The Reading Room lending tracker was inherited as a single-file application that was difficult to maintain and allowed the same item to be loaned multiple times simultaneously.
 
-A small program The Reading Room uses to track what is borrowed. It works, but it has become risky to change. Your task is to diagnose it
-and rebuild it well — **not** to change what it does, but to make it safe to
-change and impossible to leave in an invalid state.
+This project rebuilds the application using object-oriented design principles while preserving the original behaviour and enforcing the business rule that an item can only have one active loan at a time.
 
-## Running it
+---
 
-The program is plain Java (no external dependencies). You need JDK 21.
+## Running the Application
+This project only utilizes JDK 21, and requires no further installation.
 
-**With Maven:**
+Compile:
 
 ```bash
-mvn compile
-mvn exec:java -Dexec.mainClass=LendingTracker
+javac -d target/classes src/main/java/readingroom/*.java
 ```
 
-**Or directly with the JDK:**
+Run:
 
 ```bash
-javac -d target/classes src/main/java/LendingTracker.java
-java -cp target/classes LendingTracker
+java -cp target/classes readingroom.LendingTracker
 ```
 
-Run it first, before you change anything, so you can see how it currently
-behaves. Look carefully at the end-of-day report.
+---
 
-## What to hand in
+## Project Structure
 
-See the lab brief for the full list: a written diagnosis, your rebuilt version
-(behaving exactly as the original does today), a short note on your key design
-decisions, and one improvement beyond the brief. You will talk through your work
-in a live review.
+```text
+readingroom
+├── AudioKit
+├── Book
+├── LendingItem
+├── LendingTracker
+├── Library
+├── Loan
+├── LoanStatus
+├── Member
+└── MemberType
+```
+
+---
+
+## Design Notes
+
+### Abstract LendingItem Hierarchy
+
+An abstract `LendingItem` class was introduced with `Book` and `AudioKit` subclasses.
+
+This allows each item type to define its own lending rules through polymorphism, reducing coupling between lending rules and the `Library` class.
+
+### Encapsulation
+
+Fields were changed from public to private and are accessed through methods.
+
+This protects internal object state and reduces the risk of invalid modifications.
+
+### Object Relationships
+
+The original implementation stored member names and item titles as strings in the `Loan` class.
+
+The rebuilt version stores references to `Member` and `LendingItem` objects, creating a more accurate domain model and avoiding ambiguity when duplicate names or titles exist.
+
+### Enforcing the Single-Loan Rule
+
+The borrowing workflow now checks whether an item is already on loan before creating a new loan.
+
+This ensures the business rule that an item can only have one active loan at a time is always enforced.
+
+---
+
+## Supporting Future Digital Items
+
+A future `DigitalItem` can be added by extending `LendingItem` and implementing its own loan-period rules.
+
+No changes would be required to the borrowing workflow in `Library`.
+
+In the original implementation, adding a new item type would have required modifying conditional logic inside the borrowing process, increasing the risk of breaking existing behaviour.
+
+---
+
+## Additional Improvement
+
+### Return Validation
+
+Validation was added to prevent items from being returned when they are not currently on loan.
+
+Previously, the system would report a successful return even when an item had already been returned.
+
+This improves data reliability and reduces the likelihood of inaccurate lending records.his improves data reliability an* reduces the likelihood of inaccur*te*lending records.
 
 
-(For reference)
+## For reference,
+### This is the result of running the old code.
 Lent "Things Fall Apart" to Kofi Mensah for 14 days
+
 Lent "French Audio Course" to Ama Owusu for 14 days
+
 Returned "French Audio Course"
+
 Lent "Things Fall Apart" to Ama Owusu for 28 days
 
 === The Reading Room - end of day ===
+
 Items:
+
   "Things Fall Apart" (BOOK): ON_LOAN - with Ama Owusu
+
   "French Audio Course" (AUDIO_KIT): AVAILABLE
+
 Active loans:
+
   Loan #1: "Things Fall Apart" -> Kofi Mensah
+
   Loan #3: "Things Fall Apart" -> Ama Owusu
+
+  ### This is close to the expected outcome after the changes
+  

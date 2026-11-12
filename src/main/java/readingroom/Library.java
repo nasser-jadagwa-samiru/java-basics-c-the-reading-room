@@ -28,7 +28,7 @@ public class Library {
     public void borrow(Member member, LendingItem item) {
 
         if (item.isOnLoan()) {
-            System.out.println("Item is already on loan");
+            System.out.println(item.getTitle() + " is already on loan to " + member.getName());
             return;
         }
 
