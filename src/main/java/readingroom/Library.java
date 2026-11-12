@@ -44,4 +44,21 @@ public class Library {
             "Lent " + item.getTitle() + " to " + member.getName() + " for " + loanDays + " days."
         );
     }
+
+    public void returnItem(LendingItem item) {
+
+    item.returnItem();
+
+    for (Loan loan : loans) {
+
+        if (loan.getItem() == item
+                && loan.getStatus() == LoanStatus.ACTIVE) {
+
+            loan.markReturned();
+        }
+    }
+
+    System.out.println("Returned " + item.getTitle() + ".");
+}
+
 }
