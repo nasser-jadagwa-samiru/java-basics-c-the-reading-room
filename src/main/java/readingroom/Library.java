@@ -41,11 +41,15 @@ public class Library {
         loans.add(new Loan(member, item, loanDays));
 
         System.out.println(
-            "Lent " + item.getTitle() + " to " + member.getName() + " for " + loanDays + " days."
+            "Lent \"" + item.getTitle() + "\" to " + member.getName() + " for " + loanDays + " days"
         );
     }
 
     public void returnItem(LendingItem item) {
+        if (!item.isOnLoan()) {
+            System.out.println("Item is not currently on loan");
+            return;
+        }
 
         item.returnItem();
 
@@ -69,7 +73,7 @@ public class Library {
         System.out.println("Items:");
 
         for (LendingItem item : items) {
-            
+
             System.out.println(
                     "  \"" + item.getTitle()
                             + "\" (" + item.getItemType() + "): "

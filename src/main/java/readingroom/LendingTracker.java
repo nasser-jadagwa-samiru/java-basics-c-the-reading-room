@@ -35,10 +35,14 @@ public class LendingTracker {
         lib.borrow(ama, audioCourse);
 
         lib.returnItem(audioCourse);
+        lib.returnItem(audioCourse);
+        lib.returnItem(audioCourse);
 
         // should now be rejected
 
         lib.borrow(ama, novel);
+
+        
 
         lib.printReport();
     }

@@ -37,3 +37,18 @@ See the lab brief for the full list: a written diagnosis, your rebuilt version
 (behaving exactly as the original does today), a short note on your key design
 decisions, and one improvement beyond the brief. You will talk through your work
 in a live review.
+
+
+(For reference)
+Lent "Things Fall Apart" to Kofi Mensah for 14 days
+Lent "French Audio Course" to Ama Owusu for 14 days
+Returned "French Audio Course"
+Lent "Things Fall Apart" to Ama Owusu for 28 days
+
+=== The Reading Room - end of day ===
+Items:
+  "Things Fall Apart" (BOOK): ON_LOAN - with Ama Owusu
+  "French Audio Course" (AUDIO_KIT): AVAILABLE
+Active loans:
+  Loan #1: "Things Fall Apart" -> Kofi Mensah
+  Loan #3: "Things Fall Apart" -> Ama Owusu
