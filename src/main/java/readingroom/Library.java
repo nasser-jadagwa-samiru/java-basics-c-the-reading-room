@@ -47,18 +47,53 @@ public class Library {
 
     public void returnItem(LendingItem item) {
 
-    item.returnItem();
+        item.returnItem();
 
-    for (Loan loan : loans) {
+        for (Loan loan : loans) {
 
-        if (loan.getItem() == item
-                && loan.getStatus() == LoanStatus.ACTIVE) {
+            if (loan.getItem() == item
+                    && loan.getStatus() == LoanStatus.ACTIVE) {
 
-            loan.markReturned();
+                loan.markReturned();
+            }
         }
+
+        System.out.println("Returned " + item.getTitle() + ".");
     }
 
-    System.out.println("Returned " + item.getTitle() + ".");
-}
+    public void printReport() {
 
+        System.out.println();
+        System.out.println("=== " + name + " - end of day ===");
+
+        System.out.println("Items:");
+
+        for (LendingItem item : items) {
+            
+            System.out.println(
+                    "  \"" + item.getTitle()
+                            + "\" (" + item.getItemType() + "): "
+                            + (item.isOnLoan() ? "ON_LOAN" : "AVAILABLE")
+                            + (item.getCurrentBorrower() != null
+                                    ? " - with "
+                                            + item.getCurrentBorrower().getName()
+                                    : ""));
+        }
+
+        System.out.println("Active loans:");
+
+        for (Loan loan : loans) {
+
+            if (loan.getStatus() == LoanStatus.ACTIVE) {
+
+                System.out.println(
+                        "  Loan #"
+                                + loan.getId()
+                                + ": \""
+                                + loan.getItem().getTitle()
+                                + "\" -> "
+                                + loan.getMember().getName());
+            }
+        }
+    }
 }

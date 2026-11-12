@@ -40,5 +40,9 @@ public abstract class LendingItem {
         this.currentBorrower = null;
     }
 
+    public String getItemType() {
+        return getClass().getSimpleName();
+    }
+
     public abstract int getLoanPeriod(Member member);
 }
